@@ -3,27 +3,26 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 export interface Cliente {
-  id_cliente?: number;
+  id?: number;
   nombre: string;
-  apellido: string;
   correo: string;
-  telefono: string;
+  contrasena: string;
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClienteService {
-  private apiUrl = 'https://apiclases.inacode.cl/apiIOTBE/clientes';
+  private apiUrl = 'https://apiclases.inacode.cl/hotel/usuarios';
 
   constructor(private http: HttpClient) {}
 
-  obtenerClientes(): Observable<Cliente[]> {
+  getClientes(): Observable<Cliente[]> {
     return this.http.get<Cliente[]>(this.apiUrl);
   }
 
-  crearCliente(cliente: Cliente): Observable<any> {
-    return this.http.post(this.apiUrl, cliente);
+  crearCliente(cliente: Cliente): Observable<Cliente> {
+    return this.http.post<Cliente>(this.apiUrl, cliente);
   }
 
   actualizarCliente(id: number, cliente: Cliente): Observable<any> {

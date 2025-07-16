@@ -1,32 +1,63 @@
 import { Component, OnInit } from '@angular/core';
-import { HotelUsuariosService } from './hotel-usuarios.service';
+import { ClienteService, Cliente } from '../services/cliente.service';
 
 @Component({
   selector: 'app-hotel-usuarios',
   templateUrl: './hotel-usuarios.html',
-  styleUrls: ['./hotel-usuarios.css']
+  styleUrls: ['./hotel-usuarios.css'],
+  standalone: true,
+  imports: []
 })
 export class HotelUsuariosComponent implements OnInit {
-  usuarios: any[] = [];
+  clientes: Cliente[] = [];
+  nuevoCliente: Cliente = { nombre: '', correo: '', contrasena: '' };
+  editandoId: number | null = null;
 
-  constructor(private usuariosService: HotelUsuariosService) {}
+  constructor(private clienteService: ClienteService) {}
 
-  ngOnInit() {
-    this.getUsuarios();
+  ngOnInit(): void {
+    this.cargarClientes();
   }
 
-  getUsuarios() {
-    this.usuariosService.getUsuarios().subscribe(data => {
-      this.usuarios = data;
+  cargarClientes() {
+    this.clienteService.getClientes().subscribe({
+      next: (data) => this.clientes = data,
+      error: () => alert('Error al cargar usuarios')
     });
   }
 
-  eliminarUsuario(id: number) {
-    if (confirm('¿Seguro que quieres eliminar este usuario?')) {
-      this.usuariosService.deleteUsuario(id).subscribe(() => {
-        alert('Usuario eliminado');
-        this.getUsuarios();
+  guardarCliente() {
+    if (this.editandoId) {
+      this.clienteService.actualizarCliente(this.editandoId, this.nuevoCliente).subscribe(() => {
+        this.resetFormulario();
+        this.cargarClientes();
+        alert('Usuario actualizado correctamente');
+      });
+    } else {
+      this.clienteService.crearCliente(this.nuevoCliente).subscribe(() => {
+        this.resetFormulario();
+        this.cargarClientes();
+        alert('Usuario creado correctamente');
       });
     }
+  }
+
+  editar(cliente: Cliente) {
+    this.nuevoCliente = { ...cliente };
+    this.editandoId = cliente.id!;
+  }
+
+  eliminar(id: number) {
+    if (confirm('¿Seguro que deseas eliminar este usuario?')) {
+      this.clienteService.eliminarCliente(id).subscribe(() => {
+        this.cargarClientes();
+        alert('Usuario eliminado');
+      });
+    }
+  }
+
+  resetFormulario() {
+    this.nuevoCliente = { nombre: '', correo: '', contrasena: '' };
+    this.editandoId = null;
   }
 }
