@@ -13,7 +13,7 @@ export interface Cliente {
   providedIn: 'root'
 })
 export class ClienteService {
-  private apiUrl = "https://apiclases.inacode.cl/hotel";
+  private apiUrl = "https://apiclases.inacode.cl/hotel/usuarios";
 
   constructor(private http: HttpClient) {}
 
