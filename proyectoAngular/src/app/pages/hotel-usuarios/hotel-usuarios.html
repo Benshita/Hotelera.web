@@ -1,1 +1,12 @@
-<p>hotel-usuarios works!</p>
+<div class="container">
+  <h2>Usuarios</h2>
+  <a routerLink="/usuarios/crear" class="btn btn-primary mb-2">Agregar Usuario</a>
+  <div *ngFor="let usuario of usuarios" class="card mb-2">
+    <div class="card-body">
+      <h5>{{ usuario.nombre }}</h5>
+      <p>{{ usuario.correo }}</p>
+      <button [routerLink]="['/usuarios/editar', usuario.id]" class="btn btn-warning btn-sm">Editar</button>
+      <button (click)="eliminarUsuario(usuario.id)" class="btn btn-danger btn-sm">Eliminar</button>
+    </div>
+  </div>
+</div>
