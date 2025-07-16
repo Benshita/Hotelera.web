@@ -1,0 +1,34 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "strict": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "ES2022",
+    "module": "ES2022",               // ✅ Cambiado de "preserve" a "ES2022" (más estándar)
+    "moduleResolution": "node",       // ✅ Recomendado para Angular moderno
+    "types": []                       // ✅ Asegura que no se carguen tipos como "node" (que podrían venir de SSR)
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "typeCheckHostBindings": true,
+    "strictTemplates": true
+  },
+  "files": [],
+  "references": [
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.spec.json"
+    }
+  ]
+}

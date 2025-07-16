@@ -1,0 +1,45 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow-lg border-0">
+        <div class="card-body">
+          <h3 class="card-title mb-4 text-center text-primary">
+            <i class="fas fa-envelope-open-text me-2"></i>Contáctame
+          </h3>
+
+          <form (ngSubmit)="enviarCorreo()" #formulario="ngForm">
+            <div class="mb-3">
+              <label for="nombre" class="form-label">Nombre</label>
+              <div class="input-group">
+                <span class="input-group-text"><i class="fas fa-user"></i></span>
+                <input type="text" id="nombre" name="nombre" [(ngModel)]="nombre" class="form-control" placeholder="Tu nombre" required>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="correo" class="form-label">Correo</label>
+              <div class="input-group">
+                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                <input type="email" id="correo" name="correo" [(ngModel)]="correo" class="form-control" placeholder="tucorreo@example.com" required>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="mensaje" class="form-label">Mensaje</label>
+              <div class="input-group">
+                <span class="input-group-text"><i class="fas fa-comment-dots"></i></span>
+                <textarea id="mensaje" name="mensaje" [(ngModel)]="mensaje" class="form-control" placeholder="Escribe tu mensaje aquí" rows="4" required></textarea>
+              </div>
+            </div>
+
+            <div class="text-end">
+              <button type="submit" class="btn btn-primary">
+                <i class="fas fa-paper-plane me-1"></i> Enviar Consulta
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
