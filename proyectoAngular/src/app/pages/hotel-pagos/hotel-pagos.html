@@ -42,7 +42,7 @@
           <td>{{ p.id }}</td>
           <td>{{ p.id_reserva }}</td>
           <td>{{ p.monto }}</td>
-          <td>{{ p.fecha_pago | date }}</td>
+          <td>{{ p.fecha_pago | date: 'dd/MM/yyyy' }}</td>
           <td>
             <button class="btn btn-sm btn-warning me-1" (click)="editarPago(p)">
               <i class="bi bi-pencil-fill"></i>
