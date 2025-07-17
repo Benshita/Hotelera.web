@@ -39,7 +39,6 @@
         <td>{{ r.id_habitacion }}</td>
         <td>{{ r.fecha_inicio | date: 'dd/MM/yyyy' }}</td>
         <td>{{ r.fecha_fin | date:'dd/MM/yyyy' }}</td>
-
         <td>
           <button class="btn btn-sm btn-warning" (click)="editar(r)">Editar</button>
           <button class="btn btn-sm btn-danger ms-1" (click)="eliminar(r.id)">Eliminar</button>

@@ -32,16 +32,27 @@ export class HotelReservas {
   }
 
   guardar() {
-    if (this.editando && this.idEditando !== null) {
-      this.reservaService.updateReserva(this.idEditando, this.reserva).subscribe(() => {
-        this.resetear();
-        this.obtenerReservas();
-      });
-    } else {
-      this.reservaService.createReserva(this.reserva).subscribe(() => {
-        this.resetear();
-        this.obtenerReservas();
-      });
+    if (!this.reserva.id_usuario || !this.reserva.id_habitacion || !this.reserva.fecha_inicio || !this.reserva.fecha_fin) {
+      alert('Todos los campos son obligatorios');
+      return;
+    }
+
+    const mensaje = this.editando
+      ? '¿Confirmas que deseas actualizar esta reserva?'
+      : '¿Deseas crear esta nueva reserva?';
+
+    if (confirm(mensaje)) {
+      if (this.editando && this.idEditando !== null) {
+        this.reservaService.updateReserva(this.idEditando, this.reserva).subscribe(() => {
+          alert('Reserva actualizada con éxito');
+          window.location.reload();  // recarga la página
+        });
+      } else {
+        this.reservaService.createReserva(this.reserva).subscribe(() => {
+          alert('Reserva creada con éxito');
+          window.location.reload();  // recarga la página
+        });
+      }
     }
   }
 
@@ -52,9 +63,12 @@ export class HotelReservas {
   }
 
   eliminar(id: number) {
-    this.reservaService.deleteReserva(id).subscribe(() => {
-      this.obtenerReservas();
-    });
+    if (confirm('¿Estás seguro de eliminar esta reserva? Esta acción no se puede deshacer.')) {
+      this.reservaService.deleteReserva(id).subscribe(() => {
+        alert('Reserva eliminada con éxito');
+        window.location.reload(); // recarga la página
+      });
+    }
   }
 
   resetear() {

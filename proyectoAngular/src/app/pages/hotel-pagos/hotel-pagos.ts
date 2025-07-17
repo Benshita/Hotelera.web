@@ -35,6 +35,23 @@ export class HotelPagos implements OnInit {
     });
   }
 
+  confirmarGuardarPago(): void {
+    const mensaje = this.modoEdicion
+      ? '¿Confirmas que deseas actualizar este pago?'
+      : '¿Deseas registrar este nuevo pago?';
+
+    if (confirm(mensaje)) {
+      this.guardarPago();
+    }
+  }
+
+  confirmarEliminarPago(id: number): void {
+    const confirmar = confirm('¿Estás seguro de que deseas eliminar este pago? Esta acción no se puede deshacer.');
+    if (confirmar) {
+      this.eliminarPago(id);
+    }
+  }
+
   guardarPago(): void {
     if (!this.pagoNuevo.id_reserva || !this.pagoNuevo.monto || !this.pagoNuevo.fecha_pago) {
       alert('Todos los campos son obligatorios');
@@ -49,29 +66,28 @@ export class HotelPagos implements OnInit {
 
     if (this.modoEdicion && this.idPagoEditando !== null) {
       this.pagoService.actualizarPago(this.idPagoEditando, datos).subscribe(() => {
-        this.obtenerPagos();
-        this.resetFormulario();
+        alert('Pago actualizado con éxito');
+        window.location.reload(); // 👈 Recarga total
       });
     } else {
       this.pagoService.agregarPago(datos).subscribe(() => {
-        this.obtenerPagos();
-        this.resetFormulario();
+        alert('Pago registrado con éxito');
+        window.location.reload(); // 👈 Recarga total
       });
     }
+  }
+
+  eliminarPago(id: number): void {
+    this.pagoService.eliminarPago(id).subscribe(() => {
+      alert('Pago eliminado con éxito');
+      window.location.reload(); // 👈 Recarga total
+    });
   }
 
   editarPago(pago: any): void {
     this.modoEdicion = true;
     this.idPagoEditando = pago.id ?? null;
     this.pagoNuevo = { ...pago };
-  }
-
-  eliminarPago(id: number): void {
-    if (confirm('¿Estás seguro de eliminar este pago?')) {
-      this.pagoService.eliminarPago(id).subscribe(() => {
-        this.obtenerPagos();
-      });
-    }
   }
 
   resetFormulario(): void {

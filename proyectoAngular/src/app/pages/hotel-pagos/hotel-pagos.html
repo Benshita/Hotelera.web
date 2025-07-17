@@ -1,7 +1,7 @@
 <div class="container-fluid px-4 py-4">
   <h2 class="text-primary mb-4">Gestión de Pagos</h2>
 
-  <form (ngSubmit)="guardarPago()" class="row g-2 mb-4 align-items-end">
+  <form (ngSubmit)="confirmarGuardarPago()" class="row g-2 mb-4 align-items-end">
     <div class="col-md-3">
       <label class="form-label">ID Reserva</label>
       <input type="number" [(ngModel)]="pagoNuevo.id_reserva" name="id_reserva" class="form-control" required />
@@ -47,7 +47,7 @@
             <button class="btn btn-sm btn-warning me-1" (click)="editarPago(p)">
               <i class="bi bi-pencil-fill"></i>
             </button>
-            <button class="btn btn-sm btn-danger" (click)="eliminarPago(p.id)">
+            <button class="btn btn-sm btn-danger" (click)="confirmarEliminarPago(p.id)">
               <i class="bi bi-trash-fill"></i>
             </button>
           </td>
