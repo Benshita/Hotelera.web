@@ -1,1 +1,41 @@
-<p>hotel-habitaciones works!</p>
+<div class="container mt-4">
+  <h2>Gestión de Habitaciones</h2>
+  <form (ngSubmit)="guardar()" class="mb-3">
+    <div class="form-group mb-2">
+      <label>Número</label>
+      <input [(ngModel)]="habitacion.numero" name="numero" class="form-control" required />
+    </div>
+    <div class="form-group mb-2">
+      <label>Tipo</label>
+      <input [(ngModel)]="habitacion.tipo" name="tipo" class="form-control" required />
+    </div>
+    <div class="form-group mb-2">
+      <label>Precio</label>
+      <input [(ngModel)]="habitacion.precio" name="precio" type="number" class="form-control" required />
+    </div>
+    <button type="submit" class="btn btn-primary">{{ editando ? 'Actualizar' : 'Guardar' }}</button>
+    <button type="button" class="btn btn-secondary ms-2" (click)="resetear()">Cancelar</button>
+  </form>
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Número</th>
+        <th>Tipo</th>
+        <th>Precio</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let h of habitaciones">
+        <td>{{ h.numero }}</td>
+        <td>{{ h.tipo }}</td>
+        <td>{{ h.precio }}</td>
+        <td>
+          <button class="btn btn-sm btn-warning" (click)="editar(h)">Editar</button>
+          <button class="btn btn-sm btn-danger ms-1" (click)="eliminar(h.id)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

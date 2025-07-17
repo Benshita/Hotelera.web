@@ -1,1 +1,45 @@
-<p>hotel- trivago</p>
+<div class="container mt-4">
+  <h3 class="mb-3">Gestión de Pagos</h3>
+  <form (ngSubmit)="guardar()">
+    <div class="mb-3">
+      <label class="form-label">ID Reserva</label>
+      <input type="number" class="form-control" [(ngModel)]="pago.id_reserva" name="id_reserva" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Monto</label>
+      <input type="number" class="form-control" [(ngModel)]="pago.monto" name="monto" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Fecha de Pago</label>
+      <input type="date" class="form-control" [(ngModel)]="pago.fecha_pago" name="fecha_pago" required>
+    </div>
+    <button type="submit" class="btn btn-primary me-2">Guardar</button>
+    <button type="button" class="btn btn-secondary" (click)="cancelar()">Cancelar</button>
+  </form>
+
+  <hr>
+
+  <table class="table table-striped mt-4">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>ID Reserva</th>
+        <th>Monto</th>
+        <th>Fecha Pago</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let p of pagos">
+        <td>{{ p.id }}</td>
+        <td>{{ p.id_reserva }}</td>
+        <td>{{ p.monto }}</td>
+        <td>{{ p.fecha_pago | date }}</td>
+        <td>
+          <button class="btn btn-warning btn-sm me-1" (click)="editar(p)">Editar</button>
+          <button class="btn btn-danger btn-sm" (click)="eliminar(p.id)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
