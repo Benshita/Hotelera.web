@@ -5,13 +5,16 @@ import { HotelReservas } from './pages/hotel-reservass/hotel-reservas';
 import { HotelUsuariosComponent } from './pages/hotel-usuarios/hotel-usuarios';
 import { HotelHomeService } from './services/hotel-home.service';
 import { LoginComponent } from './pages/pagina-contactame/pagina-contactame';
+import { HotelHomeComponent } from './pages/home/hotel-home';
 
 export const routes: Routes = [
-  { path: '', component: HotelHomeService },
+  { path: '', component: HotelHomeComponent },
   { path: 'cliente', component: HotelUsuariosComponent },
   { path: 'contactame', component: LoginComponent },
   { path: 'hotelhabitacion', component: HotelHabitaciones},
   { path: 'hotelpagos', component: HotelPagos},
   { path: 'hotelreservas', component: HotelReservas},
   { path: 'hotelusuarios', component: HotelUsuariosComponent },
+
+
 ];
