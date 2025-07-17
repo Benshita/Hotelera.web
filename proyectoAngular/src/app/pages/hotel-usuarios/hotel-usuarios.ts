@@ -10,7 +10,7 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./hotel-usuarios.css'],  // corregí "styleUrl" a "styleUrls"
   imports: [CommonModule, FormsModule]
 })
-export class HotelUsuariosComponent implements OnInit {
+export class HotelUsuarios implements OnInit {
   clientes: Cliente[] = [];
   nuevoCliente: Cliente = { nombre: '', correo: '', contrasena: '' };
   editandoId: number | null = null;

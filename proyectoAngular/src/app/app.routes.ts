@@ -2,19 +2,17 @@ import { Routes } from '@angular/router';
 import { HotelHabitaciones } from './pages/hotel-habitaciones/hotel-habitaciones';
 import { HotelPagos } from './pages/hotel-pagos/hotel-pagos';
 import { HotelReservas } from './pages/hotel-reservass/hotel-reservas';
-import { HotelUsuariosComponent } from './pages/hotel-usuarios/hotel-usuarios';
-import { HotelHomeService } from './services/hotel-home.service';
-import { LoginComponent } from './pages/pagina-contactame/pagina-contactame';
-import { HotelHomeComponent } from './pages/home/hotel-home';
+import { HotelUsuarios } from './pages/hotel-usuarios/hotel-usuarios';
+import { Login } from './pages/pagina-contactame/pagina-contactame';
+import { HotelHome } from './pages/home/hotel-home';
 
 export const routes: Routes = [
-  { path: '', component: HotelHomeComponent },
-  { path: 'cliente', component: HotelUsuariosComponent },
-  { path: 'contactame', component: LoginComponent },
+  { path: '', component: HotelHome },
+  { path: 'cliente', component: HotelUsuarios },
+  { path: 'contactame', component: Login },
   { path: 'hotelhabitacion', component: HotelHabitaciones},
   { path: 'hotelpagos', component: HotelPagos},
   { path: 'hotelreservas', component: HotelReservas},
-  { path: 'hotelusuarios', component: HotelUsuariosComponent },
-
+  { path: 'hotelusuarios', component: HotelUsuarios },
 
 ];

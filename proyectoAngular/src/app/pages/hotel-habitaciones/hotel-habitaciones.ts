@@ -13,6 +13,7 @@ import { HabitacionesService } from '../../services/habitaciones.service';
 export class HotelHabitaciones {
   habitaciones: any[] = [];
   habitacion = {
+    id: '',
     numero: '',
     tipo: '',
     precio: 0
@@ -71,7 +72,7 @@ export class HotelHabitaciones {
   }
 
   resetear() {
-    this.habitacion = { numero: '', tipo: '', precio: 0 };
+    this.habitacion = { id: '', numero: '', tipo: '', precio: 0 };
     this.editando = false;
     this.idEditando = null;
   }

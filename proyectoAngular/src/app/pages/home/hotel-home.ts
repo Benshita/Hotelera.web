@@ -5,6 +5,6 @@ import { Component } from '@angular/core';
   templateUrl: './hotel-home.html',
   styleUrls: ['./hotel-home.css']
 })
-export class HotelHomeComponent {
+export class HotelHome {
   // Puedes agregar lógica aquí si es necesario
 }

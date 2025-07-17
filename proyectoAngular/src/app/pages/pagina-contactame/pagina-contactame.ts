@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
   styleUrl: './pagina-contactame.css',
   imports: [CommonModule, FormsModule]
 })
-export class LoginComponent {
+export class Login {
   correo: string = '';
   contrasena: string = '';
   mensajeError: string = '';
