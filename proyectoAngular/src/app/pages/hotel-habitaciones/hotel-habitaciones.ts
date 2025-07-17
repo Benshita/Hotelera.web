@@ -31,16 +31,27 @@ export class HotelHabitaciones {
   }
 
   guardar() {
-    if (this.editando && this.idEditando !== null) {
-      this.habitacionService.updateHabitacion(this.idEditando, this.habitacion).subscribe(() => {
-        this.resetear();
-        this.obtenerHabitaciones();
-      });
-    } else {
-      this.habitacionService.createHabitacion(this.habitacion).subscribe(() => {
-        this.resetear();
-        this.obtenerHabitaciones();
-      });
+    const mensaje = this.editando
+      ? '¿Confirmas que deseas actualizar esta habitación?'
+      : '¿Deseas registrar esta nueva habitación?';
+
+    if (!this.habitacion.numero || !this.habitacion.tipo || !this.habitacion.precio) {
+      alert('Todos los campos son obligatorios');
+      return;
+    }
+
+    if (confirm(mensaje)) {
+      if (this.editando && this.idEditando !== null) {
+        this.habitacionService.updateHabitacion(this.idEditando, this.habitacion).subscribe(() => {
+          alert('Habitación actualizada con éxito');
+          window.location.reload(); // 👈 Recarga la página
+        });
+      } else {
+        this.habitacionService.createHabitacion(this.habitacion).subscribe(() => {
+          alert('Habitación registrada con éxito');
+          window.location.reload(); // 👈 Recarga la página
+        });
+      }
     }
   }
 
@@ -51,9 +62,12 @@ export class HotelHabitaciones {
   }
 
   eliminar(id: number) {
-    this.habitacionService.deleteHabitacion(id).subscribe(() => {
-      this.obtenerHabitaciones();
-    });
+    if (confirm('¿Estás seguro de que deseas eliminar esta habitación? Esta acción no se puede deshacer.')) {
+      this.habitacionService.deleteHabitacion(id).subscribe(() => {
+        alert('Habitación eliminada con éxito');
+        window.location.reload(); // 👈 Recarga la página
+      });
+    }
   }
 
   resetear() {

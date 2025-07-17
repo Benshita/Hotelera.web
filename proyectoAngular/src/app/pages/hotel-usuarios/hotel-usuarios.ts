@@ -7,7 +7,7 @@ import { FormsModule } from '@angular/forms';
   selector: 'app-hotel-usuarios',
   standalone: true,
   templateUrl: './hotel-usuarios.html',
-  styleUrl: './hotel-usuarios.css',
+  styleUrls: ['./hotel-usuarios.css'],  // corregí "styleUrl" a "styleUrls"
   imports: [CommonModule, FormsModule]
 })
 export class HotelUsuariosComponent implements OnInit {
@@ -30,17 +30,19 @@ export class HotelUsuariosComponent implements OnInit {
 
   guardarCliente(): void {
     if (this.editandoId) {
-      this.clienteService.actualizarCliente(this.editandoId, this.nuevoCliente).subscribe(() => {
-        this.cargarClientes();
-        this.resetFormulario();
-        alert('Usuario actualizado');
-      });
+      if (confirm('¿Confirmas actualizar este usuario?')) {
+        this.clienteService.actualizarCliente(this.editandoId, this.nuevoCliente).subscribe(() => {
+          alert('Usuario actualizado');
+          window.location.reload(); // Recarga la página completa
+        });
+      }
     } else {
-      this.clienteService.crearCliente(this.nuevoCliente).subscribe(() => {
-        this.cargarClientes();
-        this.resetFormulario();
-        alert('Usuario creado');
-      });
+      if (confirm('¿Confirmas crear este usuario?')) {
+        this.clienteService.crearCliente(this.nuevoCliente).subscribe(() => {
+          alert('Usuario creado');
+          window.location.reload(); // Recarga la página completa
+        });
+      }
     }
   }
 
@@ -52,8 +54,8 @@ export class HotelUsuariosComponent implements OnInit {
   eliminar(id: number): void {
     if (confirm('¿Deseas eliminar este usuario?')) {
       this.clienteService.eliminarCliente(id).subscribe(() => {
-        this.cargarClientes();
         alert('Usuario eliminado');
+        window.location.reload(); // Recarga la página completa
       });
     }
   }
