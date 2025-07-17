@@ -1,25 +1,35 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
-@Injectable({ providedIn: 'root' })
+export interface Pago {
+  id?: number;
+  id_reserva: number;
+  monto: number;
+  fecha_pago: string;
+}
+
+@Injectable({
+  providedIn: 'root'
+})
 export class PagosService {
-  private url = 'https://apiclases.inacode.cl/hotel/pagos';
+  private apiUrl = 'https://apiclases.inacode.cl/hotel/pagos';
 
   constructor(private http: HttpClient) {}
 
-  obtenerPagos() {
-    return this.http.get(this.url);
+  obtenerPagos(): Observable<Pago[]> {
+    return this.http.get<Pago[]>(this.apiUrl);
   }
 
-  agregarPago(pago: any) {
-    return this.http.post(this.url, pago);
+  agregarPago(pago: Pago): Observable<any> {
+    return this.http.post(this.apiUrl, pago);
   }
 
-  actualizarPago(id: number, pago: any) {
-    return this.http.put(`${this.url}/${id}`, pago);
+  actualizarPago(id: number, pago: Pago): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${id}`, pago);
   }
 
-  eliminarPago(id: number) {
-    return this.http.delete(`${this.url}/${id}`);
+  eliminarPago(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${id}`);
   }
 }
