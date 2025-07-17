@@ -4,37 +4,33 @@
       <div class="card shadow-lg border-0">
         <div class="card-body">
           <h3 class="card-title mb-4 text-center text-primary">
-            <i class="fas fa-envelope-open-text me-2"></i>Contáctame
+            <i class="fas fa-sign-in-alt me-2"></i>Iniciar Sesión
           </h3>
 
-          <form (ngSubmit)="enviarCorreo()" #formulario="ngForm">
-            <div class="mb-3">
-              <label for="nombre" class="form-label">Nombre</label>
-              <div class="input-group">
-                <span class="input-group-text"><i class="fas fa-user"></i></span>
-                <input type="text" id="nombre" name="nombre" [(ngModel)]="nombre" class="form-control" placeholder="Tu nombre" required>
-              </div>
-            </div>
-
+          <form (ngSubmit)="iniciarSesion()">
             <div class="mb-3">
               <label for="correo" class="form-label">Correo</label>
               <div class="input-group">
                 <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-                <input type="email" id="correo" name="correo" [(ngModel)]="correo" class="form-control" placeholder="tucorreo@example.com" required>
+                <input type="email" id="correo" [(ngModel)]="correo" name="correo" class="form-control" required>
               </div>
             </div>
 
             <div class="mb-3">
-              <label for="mensaje" class="form-label">Mensaje</label>
+              <label for="contrasena" class="form-label">Contraseña</label>
               <div class="input-group">
-                <span class="input-group-text"><i class="fas fa-comment-dots"></i></span>
-                <textarea id="mensaje" name="mensaje" [(ngModel)]="mensaje" class="form-control" placeholder="Escribe tu mensaje aquí" rows="4" required></textarea>
+                <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                <input type="password" id="contrasena" [(ngModel)]="contrasena" name="contrasena" class="form-control" required>
               </div>
+            </div>
+
+            <div *ngIf="mensajeError" class="alert alert-danger text-center">
+              {{ mensajeError }}
             </div>
 
             <div class="text-end">
               <button type="submit" class="btn btn-primary">
-                <i class="fas fa-paper-plane me-1"></i> Enviar Consulta
+                <i class="fas fa-sign-in-alt me-1"></i> Iniciar Sesión
               </button>
             </div>
           </form>

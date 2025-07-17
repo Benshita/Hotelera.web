@@ -1,45 +1,31 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { HttpClient, HttpClientModule } from '@angular/common/http'; // <- Importar módulo
+import { ClienteService } from '../../services/iniciosesion.service';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-pagina-contactame',
+  selector: 'app-login',
   standalone: true,
   templateUrl: './pagina-contactame.html',
-  styleUrls: ['./pagina-contactame.css'],
-  imports: [CommonModule, FormsModule, HttpClientModule] // <- Agregar HttpClientModule aquí
+  styleUrl: './pagina-contactame.css',
+  imports: [CommonModule, FormsModule]
 })
-export class PaginaContactameComponent {
-  nombre = '';
-  correo = '';
-  mensaje = '';
+export class LoginComponent {
+  correo: string = '';
+  contrasena: string = '';
+  mensajeError: string = '';
 
-  constructor(private http: HttpClient) {}
+  constructor(private clienteService: ClienteService, private router: Router) {}
 
-  enviarCorreo() {
-    const datos = {
-      nombre: this.nombre,
-      correo: this.correo,
-      mensaje: this.mensaje
-    };
-
-    const token = 'JV8SS2zdS02I5gr1dy5Fd4HGSIOY6HHEAO0SuVOLu54dLnUvNu'; // Tu token
-
-    const headers = {
-      'Authorization': `Bearer ${token}`
-    };
-
-    this.http.post('http://localhost:3000/enviarCorreo', datos, { headers }).subscribe({
-      next: () => {
-        alert('✅ Consulta enviada con éxito');
-        this.nombre = '';
-        this.correo = '';
-        this.mensaje = '';
+  iniciarSesion(): void {
+    this.clienteService.loginCliente(this.correo, this.contrasena).subscribe({
+      next: (usuario) => {
+        localStorage.setItem('usuario', JSON.stringify(usuario));
+        this.router.navigate(['https://apiclases.inacode.cl/hotel/usuarios']); // cambia a la ruta que desees
       },
-      error: err => {
-        console.error('❌ Error al enviar desde Angular:', err);
-        alert('❌ Error al enviar el correo: ' + err.error?.error || err.message);
+      error: () => {
+        this.mensajeError = 'Correo o contraseña incorrectos';
       }
     });
   }
